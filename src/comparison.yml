@@ -1,17 +1,25 @@
-
-# Using softwaremill/elasticmq-native - Amazon SQS compatible in-memory message queue
-# I'm pretty sure AWS client using HTTP to communicate
 sqs:
-  all: 113.665ms
 
-  connection: 3.983ms
-  create: 83.278ms
-  delete: 19.985ms
+  # Using softwaremill/elasticmq-native - Amazon SQS compatible in-memory message queue
+  # I'm pretty sure AWS client using HTTP to communicate
+  elasticmq:
+    all: 109.706ms
+
+    queue.create: 81.84ms
+
+    consumer.create: 14.903ms
+
+    queue.delete: 11.199ms
 
 # Amqplib - RabbitMQ docker version
 rabbit-mq:
-  all: 81.688ms
+  all: 82.304ms
 
-  connection: 57.786ms
-  create: 12.685ms
-  delete: 8.058ms
+  exchange.create: 13.219ms
+  queue.create: 19.633ms
+
+  binding: 9.874ms
+  consumer.create: 4.188ms
+
+  queue.delete: 12.455ms
+  exchange.delete: 20.227ms

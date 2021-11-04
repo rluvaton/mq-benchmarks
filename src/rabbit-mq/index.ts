@@ -1,6 +1,14 @@
+import { v4 as uuidv4 } from 'uuid';
 import * as amqplib from 'amqplib';
+import { benchmarkRunner } from '../common/benchmark-runner';
+import { chooseRandomItemFromArray } from '../common/utils';
 
-async function run() {
+export const run = async () => {
+  const exchangeName = uuidv4();
+  const queueName = uuidv4();
+
+  const exchangeRandomType = chooseRandomItemFromArray(['direct', 'topic', 'headers', 'fanout' /*, 'match'*/]);
+
   const connectionProperties = {
     protocol: 'amqp',
     hostname: 'localhost',
@@ -12,21 +20,18 @@ async function run() {
     heartbeat: 0,
     vhost: '/',
   };
-  console.time('all');
-  console.time('connection');
+
   const connection = await amqplib.connect(connectionProperties);
   const channel = await connection.createChannel();
-  console.timeEnd('connection');
 
-  console.time('create');
-  // No name will generate a unique queue name for you
-  const { queue } = await channel.assertQueue(undefined);
-  console.timeEnd('create');
-
-  console.time('delete');
-  await channel.deleteQueue(queue);
-  console.timeEnd('delete');
-  console.timeEnd('all');
-}
+  await benchmarkRunner({
+    createExchange: async () => await channel.assertExchange(exchangeName, exchangeRandomType),
+    createQueue: async () => await channel.assertQueue(queueName),
+    binding: async () => await channel.bindQueue(queueName, exchangeName, ''),
+    createConsumer: async () => await channel.consume(queueName, (data) => undefined),
+    deleteQueue: async () => await channel.deleteQueue(queueName),
+    deleteExchange: async () => await channel.deleteExchange(exchangeName),
+  });
+};
 
 run();

@@ -1,10 +1,7 @@
-# NodeJS Boilerplate
+# MQ Benchmark
 
-## Features:
-- TypeScript
-- Jest
-- ESLint
-- Prettier
-- Husky
-- CommitLint
-- CI in GitHub Action
+## Each benchmark should have the following benchmarks:
+1. Create topic / exchange / queue
+2. Bindings
+3. Create consumer
+4. Delete topic / exchange / queue

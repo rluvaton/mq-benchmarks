@@ -20,8 +20,10 @@
     "prepare": "husky install",
     "build": "tsc -p tsconfig.build.json",
     "clean": "rimraf lib",
+    "prestart:rabitmq": "docker-compose --file src/rabbit-mq/docker-compose.yml up -d",
     "start:rabbitmq": "ts-node src/rabbit-mq/index.ts",
-    "start:sqs": "ts-node src/sqs/index.ts",
+    "prestart:sqs:elasticmq": "docker-compose --file src/sqs/elasticmq/docker-compose.yml up -d",
+    "start:sqs:elasticmq": "ts-node src/sqs/elasticmq/index.ts",
     "coverage": "jest --coverage",
     "test": "jest --passWithNoTests",
     "watch": "jest --watch",
@@ -29,7 +31,8 @@
     "lint": "eslint \"src/**/*.ts\" --fix"
   },
   "dependencies": {
-    "amqplib": "^0.8.0"
+    "amqplib": "^0.8.0",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@commitlint/cli": "^13.1.0",
@@ -38,6 +41,7 @@
     "@types/amqplib": "^0.8.2",
     "@types/faker": "^5.5.8",
     "@types/jest": "^27.0.1",
+    "@types/uuid": "^8.3.1",
     "@typescript-eslint/eslint-plugin": "^4.31.1",
     "@typescript-eslint/parser": "^4.31.1",
     "aws-sdk": "^2.1018.0",
