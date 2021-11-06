@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+
+  localstack:
+    image: localstack/localstack:0.12.20
+    ports:
+      - "4566:4566"
+      - "4571:4571"
+    environment:
+      - AWS_DEFAULT_REGION=ap-southeast-1
+      - EDGE_PORT=4566
+      - SERVICES=sqs
+
+      - DOCKER_HOST=unix:///var/run/docker.sock
+    volumes:
+      - "${TMPDIR:-/tmp/localstack}:/tmp/localstack"
