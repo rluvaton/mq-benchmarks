@@ -1,7 +1,5 @@
 sqs:
 
-  # Using softwaremill/elasticmq-native - Amazon SQS compatible in-memory message queue
-  # I'm pretty sure AWS client using HTTP to communicate
   elasticmq:
     all: 109.706ms
 
@@ -11,6 +9,7 @@ sqs:
 
     queue.delete: 11.199ms
 
+  # Uses ElasticMQ under the hood.
   localstack:
 	all: 209.297ms
 
