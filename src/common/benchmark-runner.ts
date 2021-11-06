@@ -18,6 +18,7 @@ export const benchmarkRunner = async ({
   deleteQueue = undefined,
   binding = undefined,
   createConsumer = undefined,
+  deleteConsumer = undefined,
   createProducer = undefined,
   teardown = undefined,
 } = {}) => {
@@ -33,6 +34,7 @@ export const benchmarkRunner = async ({
 
   createConsumer && (await runTimed('consumer.create', createConsumer));
   createProducer && (await runTimed('producer.create', createProducer));
+  deleteConsumer && (await runTimed('consumer.delete', deleteConsumer));
 
   createQueue && deleteQueue && (await runTimed('queue.delete', deleteQueue));
   createExchange && deleteExchange && (await runTimed('exchange.delete', deleteExchange));

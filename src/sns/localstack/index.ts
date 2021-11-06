@@ -1,8 +1,8 @@
 import * as AWS from 'aws-sdk';
-import { benchmarkSqs } from '../common/benchmark-sqs';
+import { benchmarkSns } from '../common/benchmark-sns';
 
 export const run = async () => {
-  await benchmarkSqs({
+  await benchmarkSns({
     endpoint: new AWS.Endpoint('http://localhost:4566'),
     accessKeyId: 'na',
     secretAccessKey: 'na',

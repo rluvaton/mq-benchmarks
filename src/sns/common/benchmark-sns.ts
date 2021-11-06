@@ -2,22 +2,34 @@ import { benchmarkRunner } from '../../common/benchmark-runner';
 import { v4 as uuidv4 } from 'uuid';
 import * as AWS from 'aws-sdk';
 
-export const benchmarkSqs = async (sqsConfig) => {
-  const sqs = new AWS.SQS(sqsConfig);
+export const benchmarkSns = async (snsConfig) => {
+  const sns = new AWS.SNS(snsConfig);
 
-  const queueName = uuidv4();
+  const topicName = uuidv4();
 
   const params = {
-    QueueName: queueName,
+    Name: topicName,
   };
-  let queueUrl;
+  let topicArn;
+  let subscriptionArn;
 
   await benchmarkRunner({
-    createQueue: async () => {
-      await sqs.createQueue(params).promise();
-      queueUrl = (await sqs.getQueueUrl(params).promise()).QueueUrl;
+    createTopic: async () => {
+      topicArn = (await sns.createTopic(params).promise()).TopicArn;
     },
-    createConsumer: async () => await sqs.receiveMessage({ QueueUrl: queueUrl }, () => undefined).promise(),
-    deleteQueue: async () => await sqs.deleteQueue({ QueueUrl: queueUrl }).promise(),
+    createConsumer: async () => {
+      subscriptionArn = (
+        await sns
+          .subscribe({ TopicArn: topicArn, Protocol: 'application', Endpoint: 'MOBILE_ENDPOINT_ARN' }, () => undefined)
+          .promise()
+      ).SubscriptionArn;
+    },
+    deleteConsumer: async () => await sns.unsubscribe({ SubscriptionArn: subscriptionArn }, () => undefined).promise(),
+    deleteTopic: async () =>
+      await sns
+        .deleteTopic({
+          TopicArn: topicArn,
+        })
+        .promise(),
   });
 };

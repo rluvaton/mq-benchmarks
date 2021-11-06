@@ -10,7 +10,7 @@ services:
     environment:
       - AWS_DEFAULT_REGION=ap-southeast-1
       - EDGE_PORT=4566
-      - SERVICES=sqs
+      - SERVICES=sns
 
       - DOCKER_HOST=unix:///var/run/docker.sock
     volumes:

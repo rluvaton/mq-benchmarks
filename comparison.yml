@@ -21,6 +21,24 @@ sqs:
 	queue.delete: 24.734ms
 
 
+sns:
+  localstack:
+    all: 192.801ms
+
+    topic.create: 74.477ms
+
+    consumer.create: 42.941ms
+    consumer.delete: 41.246ms
+
+    topic.delete: 31.727ms
+
+redis:
+  all: 4.681ms
+
+  consumer.create: 1.393ms
+  consumer.delete: 0.143ms
+
+
 # Amqplib - RabbitMQ docker version
 rabbit-mq:
   all: 82.304ms
