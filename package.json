@@ -24,6 +24,8 @@
     "start:rabbitmq": "ts-node src/rabbit-mq/index.ts",
     "prestart:sqs:elasticmq": "docker-compose --file src/sqs/elasticmq/docker-compose.yml up -d",
     "start:sqs:elasticmq": "ts-node src/sqs/elasticmq/index.ts",
+    "prestart:sqs:localstack": "docker-compose --file src/sqs/localstack/docker-compose.yml up -d",
+    "start:sqs:localstack": "ts-node src/sqs/localstack/index.ts",
     "coverage": "jest --coverage",
     "test": "jest --passWithNoTests",
     "watch": "jest --watch",

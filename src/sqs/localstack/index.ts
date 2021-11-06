@@ -3,10 +3,10 @@ import { benchmarkSqs } from '../common/benchmark-sqs';
 
 export const run = async () => {
   await benchmarkSqs({
-    endpoint: new AWS.Endpoint('http://localhost:9324'),
+    endpoint: new AWS.Endpoint('http://localhost:4566'),
     accessKeyId: 'na',
     secretAccessKey: 'na',
-    region: 'REGION',
+    region: 'ap-southeast-1',
   });
 };
 
