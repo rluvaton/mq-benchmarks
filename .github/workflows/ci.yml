@@ -12,10 +12,10 @@ jobs:
         run: npm ci
 
       - name: Format
-        run: npm benchmarkSqs format
+        run: npm run format
 
       - name: Lint
-        run: npm benchmarkSqs lint
+        run: npm run lint
 
       - name: Test
         run: npm test

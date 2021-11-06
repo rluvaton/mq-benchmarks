@@ -28,7 +28,7 @@ export const run = async () => {
     createExchange: async () => await channel.assertExchange(exchangeName, exchangeRandomType),
     createQueue: async () => await channel.assertQueue(queueName),
     binding: async () => await channel.bindQueue(queueName, exchangeName, ''),
-    createConsumer: async () => await channel.consume(queueName, (data) => undefined),
+    createConsumer: async () => await channel.consume(queueName, () => undefined),
     deleteQueue: async () => await channel.deleteQueue(queueName),
     deleteExchange: async () => await channel.deleteExchange(exchangeName),
   });

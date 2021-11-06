@@ -6,8 +6,8 @@ const runTimed = async (name, fn) => {
   console.timeEnd(name);
 };
 
-// On real benchmark we benchmarkSqs the same operation many times and get the average
-// here we gonna benchmarkSqs once
+// On real benchmark we run the same operation many times and get the average
+// here we gonna run once
 export const benchmarkRunner = async ({
   setup = undefined,
   createTopic = undefined,
