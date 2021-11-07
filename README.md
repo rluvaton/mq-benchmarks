@@ -13,3 +13,4 @@
   - ElasticMQ
 - SNS (LocalStack)
 - Redis
+- Kafka (WIP)

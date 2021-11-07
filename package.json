@@ -30,6 +30,8 @@
     "start:sns:localstack": "ts-node src/sns/localstack/index.ts",
     "prestart:redis": "docker-compose --file src/redis/docker-compose.yml up -d",
     "start:redis": "ts-node src/redis/index.ts",
+    "prestart:kafka": "ts-node src/kafka/set-current-ip-in-env.ts && docker-compose --file src/kafka/docker-compose.yml up -d",
+    "start:kafka": "ts-node src/kafka/index.ts",
     "coverage": "jest --coverage",
     "test": "jest --passWithNoTests",
     "watch": "jest --watch",
@@ -38,6 +40,10 @@
   },
   "dependencies": {
     "amqplib": "^0.8.0",
+    "cross-env": "^7.0.3",
+    "dotenv": "^10.0.0",
+    "kafkajs": "^1.15.0",
+    "promise.allsettled": "^1.0.5",
     "redis": "^3.1.2",
     "uuid": "^8.3.2"
   },
@@ -48,6 +54,7 @@
     "@types/amqplib": "^0.8.2",
     "@types/faker": "^5.5.8",
     "@types/jest": "^27.0.1",
+    "@types/promise.allsettled": "^1.0.3",
     "@types/redis": "^2.8.32",
     "@types/uuid": "^8.3.1",
     "@typescript-eslint/eslint-plugin": "^4.31.1",
