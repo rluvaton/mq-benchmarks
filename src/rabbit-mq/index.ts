@@ -25,6 +25,7 @@ export const run = async () => {
   const channel = await connection.createChannel();
 
   await benchmarkRunner({
+    name: 'RabbitMQ',
     createExchange: async () => await channel.assertExchange(exchangeName, exchangeRandomType),
     createQueue: async () => await channel.assertQueue(queueName),
     binding: async () => await channel.bindQueue(queueName, exchangeName, ''),

@@ -2,7 +2,7 @@ import * as AWS from 'aws-sdk';
 import { benchmarkSns } from '../common/benchmark-sns';
 
 export const run = async () => {
-  await benchmarkSns({
+  await benchmarkSns('LocalStack', {
     endpoint: new AWS.Endpoint('http://localhost:4566'),
     accessKeyId: 'na',
     secretAccessKey: 'na',

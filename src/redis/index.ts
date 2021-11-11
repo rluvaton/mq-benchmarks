@@ -9,6 +9,7 @@ export const run = async () => {
   let subscriber: RedisClient;
 
   await benchmarkRunner({
+    name: 'Redis',
     setup: async () =>
       (subscriber = redis.createClient({
         host: 'localhost',

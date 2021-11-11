@@ -20,16 +20,27 @@
     "prepare": "husky install",
     "build": "tsc -p tsconfig.build.json",
     "clean": "rimraf lib",
+
     "prestart:rabitmq": "docker-compose --file src/rabbit-mq/docker-compose.yml up -d",
     "start:rabbitmq": "ts-node src/rabbit-mq/index.ts",
+    "poststart:rabitmq": "docker-compose --file src/rabbit-mq/docker-compose.yml down -v",
+
     "prestart:sqs:elasticmq": "docker-compose --file src/sqs/elasticmq/docker-compose.yml up -d",
     "start:sqs:elasticmq": "ts-node src/sqs/elasticmq/index.ts",
+    "poststart:sqs:elasticmq": "docker-compose --file src/sqs/elasticmq/docker-compose.yml down -v",
+
     "prestart:sqs:localstack": "docker-compose --file src/sqs/localstack/docker-compose.yml up -d",
     "start:sqs:localstack": "ts-node src/sqs/localstack/index.ts",
+    "poststart:sqs:localstack": "docker-compose --file src/sqs/localstack/docker-compose.yml down -v",
+
     "prestart:sns:localstack": "docker-compose --file src/sns/localstack/docker-compose.yml up -d",
     "start:sns:localstack": "ts-node src/sns/localstack/index.ts",
+    "poststart:sns:localstack": "docker-compose --file src/sns/localstack/docker-compose.yml down -v",
+
     "prestart:redis": "docker-compose --file src/redis/docker-compose.yml up -d",
     "start:redis": "ts-node src/redis/index.ts",
+    "poststart:redis": "docker-compose --file src/redis/docker-compose.yml down -v",
+
     "coverage": "jest --coverage",
     "test": "jest --passWithNoTests",
     "watch": "jest --watch",

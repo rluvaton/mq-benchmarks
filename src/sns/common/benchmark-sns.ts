@@ -2,7 +2,7 @@ import { benchmarkRunner } from '../../common/benchmark-runner';
 import { v4 as uuidv4 } from 'uuid';
 import * as AWS from 'aws-sdk';
 
-export const benchmarkSns = async (snsConfig) => {
+export const benchmarkSns = async (source, snsConfig) => {
   const sns = new AWS.SNS(snsConfig);
 
   const topicName = uuidv4();
@@ -14,6 +14,7 @@ export const benchmarkSns = async (snsConfig) => {
   let subscriptionArn;
 
   await benchmarkRunner({
+    name: `SNS (${source})`,
     createTopic: async () => {
       topicArn = (await sns.createTopic(params).promise()).TopicArn;
     },
