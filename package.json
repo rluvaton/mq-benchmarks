@@ -21,9 +21,9 @@
     "build": "tsc -p tsconfig.build.json",
     "clean": "rimraf lib",
 
-    "prestart:rabitmq": "docker-compose --file src/rabbit-mq/docker-compose.yml up -d",
+    "prestart:rabbitmq": "docker-compose --file src/rabbit-mq/docker-compose.yml up -d",
     "start:rabbitmq": "ts-node src/rabbit-mq/index.ts",
-    "poststart:rabitmq": "docker-compose --file src/rabbit-mq/docker-compose.yml down -v",
+    "poststart:rabbitmq": "docker-compose --file src/rabbit-mq/docker-compose.yml down -v",
 
     "prestart:sqs:elasticmq": "docker-compose --file src/sqs/elasticmq/docker-compose.yml up -d",
     "start:sqs:elasticmq": "ts-node src/sqs/elasticmq/index.ts",
