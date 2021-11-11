@@ -32,6 +32,7 @@ export const run = async () => {
     createConsumer: async () => await channel.consume(queueName, () => undefined),
     deleteQueue: async () => await channel.deleteQueue(queueName),
     deleteExchange: async () => await channel.deleteExchange(exchangeName),
+    teardown: async () => await connection.close(),
   });
 };
 
